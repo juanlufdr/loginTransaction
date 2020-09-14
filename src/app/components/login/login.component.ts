@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoginServiceProxyService } from './login-service-proxy.service';
-import { UserI } from '../models/user.model';
+import { Router } from '@angular/router';
+import { UserI } from 'src/app/models/user.model';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -12,10 +14,10 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private loginServie: LoginServiceProxyService) { 
+  constructor(private fb: FormBuilder, private loginServie: LoginServiceProxyService, private router: Router, private _snackBar: MatSnackBar) { 
     this.loginForm = this.fb.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required]
+      username: ['user', Validators.required],
+      password: ['pass', Validators.required]
     })
   }
 
@@ -33,11 +35,20 @@ export class LoginComponent implements OnInit {
     this.loginServie.login(user).subscribe(
       (data) => {
         console.log('success', data)
+        this.router.navigate(['transactions']);
       },
       (error) => {
         console.error('error');
+        const msg = `User or password incorrect`;
+        this.openSnackBar(msg, 'Close');
       }
     )
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 2000,
+    });
   }
 
 }

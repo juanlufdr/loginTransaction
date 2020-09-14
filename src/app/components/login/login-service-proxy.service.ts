@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs/operators'
 import { BehaviorSubject, Observable } from 'rxjs';
-import { UserI } from '../models/user.model';
-import { JwtResponseI } from '../models/jwt-response.interface';
+import { UserI } from 'src/app/models/user.model';
+import { JwtResponseI } from 'src/app/models/jwt-response.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +24,7 @@ export class LoginServiceProxyService {
         (res: any) => {
           if (res) {
             // guardar token
-            //this.saveToken(res.dataUser.accessToken, res.dataUser.expiresIn);
+            this.saveToken(res.accessToken);
           }
         })
       );

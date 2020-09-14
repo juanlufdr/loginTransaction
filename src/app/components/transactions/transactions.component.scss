@@ -1,0 +1,31 @@
+.transaction-table {
+  width: 96%;
+  margin: 1em 2em;
+
+  .filters-container {
+    display: flex;
+    justify-content: space-between;
+
+    .btn {
+      background-color: #ffffff;
+      border: 1px solid black;
+      padding: 0 1em;
+      border-radius: 2em;
+      margin: 0 0.5em;
+    }
+    .buttonSelected {
+      background-color: #cccccc;
+    }
+
+    .select-filter {
+      width: 7em !important;
+      border: 2px solid black;
+      padding: 0 1em;
+      border-radius: 1em;
+    }
+  }
+
+  .table-data {
+    width: 100%;
+  }
+}
