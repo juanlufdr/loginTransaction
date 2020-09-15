@@ -16,8 +16,8 @@ export class LoginComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private loginServie: LoginServiceProxyService, private router: Router, private _snackBar: MatSnackBar) { 
     this.loginForm = this.fb.group({
-      username: ['user', Validators.required],
-      password: ['pass', Validators.required]
+      username: ['', Validators.required],
+      password: ['', Validators.required]
     })
   }
 
@@ -34,11 +34,9 @@ export class LoginComponent implements OnInit {
     }
     this.loginServie.login(user).subscribe(
       (data) => {
-        console.log('success', data)
         this.router.navigate(['transactions']);
       },
       (error) => {
-        console.error('error');
         const msg = `User or password incorrect`;
         this.openSnackBar(msg, 'Close');
       }
